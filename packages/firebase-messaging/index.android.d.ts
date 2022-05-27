@@ -1,0 +1,34 @@
+import { AndroidActivityNewIntentEventData } from '@nativescript/core';
+import { FirebaseApp } from '@nativescript/firebase-core';
+import { AuthorizationStatus, IMessaging, RemoteMessage } from './common';
+export { AuthorizationStatus } from './common';
+export declare class Messaging implements IMessaging {
+    #private;
+    showNotificationsWhenInForeground: boolean;
+    constructor();
+    _newIntentCallback(args: AndroidActivityNewIntentEventData): void;
+    get _onMessage(): (message: RemoteMessage) => void;
+    get _onMessageCallback(): any;
+    get _onNotificationTap(): (message: RemoteMessage) => void;
+    get _onNotificationTapCallback(): any;
+    get _onToken(): (token: string) => void;
+    get _onTokenCallback(): any;
+    getToken(): Promise<string>;
+    getAPNSToken(): any;
+    hasPermission(): Promise<AuthorizationStatus>;
+    onMessage(listener: (message: RemoteMessage) => any): void;
+    onNotificationTap(listener: (message: RemoteMessage) => any): void;
+    onToken(listener: (token: string) => any): void;
+    registerDeviceForRemoteMessages(): Promise<void>;
+    requestPermission(permissions?: any): Promise<AuthorizationStatus>;
+    subscribeToTopic(topic: string): Promise<void>;
+    unregisterDeviceForRemoteMessages(): Promise<void>;
+    unsubscribeFromTopic(topic: string): Promise<void>;
+    deleteToken(): Promise<void>;
+    get isDeviceRegisteredForRemoteMessages(): boolean;
+    get autoInitEnabled(): boolean;
+    set autoInitEnabled(value: boolean);
+    get app(): FirebaseApp;
+    get native(): com.google.firebase.messaging.FirebaseMessaging;
+    get android(): com.google.firebase.messaging.FirebaseMessaging;
+}
